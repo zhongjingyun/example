@@ -1,0 +1,52 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+# 更换自己的数据库和表，本项目使用用户和资产作为例子
+sharding:
+  jdbc:
+    datasource:
+      names: db01-master,db01-slave,db02-master,db02-slave
+      db01-master:
+        jdbc-url: jdbc:mysql://ip:port/ds01?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&rewriteBatchedStatements=true&allowMultiQueries=true&useSSL=false
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+      db01-slave:
+        jdbc-url: jdbc:mysql://ip:port/ds01?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&rewriteBatchedStatements=true&allowMultiQueries=true&useSSL=false
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+      db02-master:
+        jdbc-url: jdbc:mysql://ip:port/ds02?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&rewriteBatchedStatements=true&allowMultiQueries=true&useSSL=false
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+      db02-slave:
+        jdbc-url: jdbc:mysql://ip:port/ds02?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&rewriteBatchedStatements=true&allowMultiQueries=true&useSSL=false
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+    config:
+      props:
+        sql:
+          show: true
+      sharding:
+        master-slave-rules:
+          ds_db01:
+            masterDataSourceName: db01-master
+            slaveDataSourceNames:
+              - db01-slave
+          ds_db02:
+            masterDataSourceName: db02-master
+            slaveDataSourceNames:
+              - db02-slave
+        default-data-source-name: ds_db01
+        default-database-strategy:
+          hint:
+            algorithm-class-name: com.jiyu.conf.MyDatasourceRoutingAlgorithm

@@ -22,6 +22,8 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
+        <shardingsphere.version>3.1.0</shardingsphere.version>
+        <mybatis.version>2.0.1</mybatis.version>
     </properties>
 
     <dependencyManagement>
