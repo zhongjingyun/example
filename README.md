@@ -21,4 +21,5 @@ MyDatasourceRoutingAlgorithm 强制路由策略，根据AOP指定的数据源进
 
 ### 评率回复
 1. MR_Wxm:博主，shardingJDBC可以实现msyql的双主模式吗，目前看到的大部分都是主从，分库也都是基于表的主键id来的，有没有可以直接自动轮询主库的配置5小时前
-shardingjdbc-xa-multi-master 针对问题，新写了这个项目，去掉了从库，直接支持多主，依然使用强制路由和AOP实现。
+
+【回复】：shardingjdbc-xa-multi-master 针对问题，新写了这个项目，去掉了从库，直接支持多主，依然使用强制路由和AOP实现。
