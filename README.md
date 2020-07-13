@@ -18,3 +18,7 @@ DataSourceAop 通过AOP不通包路径动态指定数据源。
 MyDatasourceRoutingAlgorithm 强制路由策略，根据AOP指定的数据源进行强制路由。
 
 当不需要分布式事务的地方，去掉这个注解@ShardingTransactionType(TransactionType.XA)，或者使用@ShardingTransactionType(TransactionType.LOCAL)，分布式事务性能比较差
+
+### 评率回复
+1. MR_Wxm:博主，shardingJDBC可以实现msyql的双主模式吗，目前看到的大部分都是主从，分库也都是基于表的主键id来的，有没有可以直接自动轮询主库的配置5小时前
+shardingjdbc-xa-multi-master 针对问题，新写了这个项目，去掉了从库，直接支持多主，依然使用强制路由和AOP实现。

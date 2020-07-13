@@ -1,0 +1,30 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /
+
+# 更换自己的数据库和表，本项目使用用户和资产作为例子
+spring:
+  shardingsphere:
+    datasource:
+      names: db01-master,db02-master
+      db01-master:
+        jdbc-url: jdbc:mysql://ip:port/ds01?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&rewriteBatchedStatements=true&allowMultiQueries=true&useSSL=false
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+      db02-master:
+        jdbc-url: jdbc:mysql://ip:port/ds02?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&rewriteBatchedStatements=true&allowMultiQueries=true&useSSL=false
+        username: root
+        password: root
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+    props:
+      sql:
+        show: true
+    sharding:
+      default-data-source-name: db01-master
+      default-database-strategy:
+        hint:
+          algorithm-class-name: com.jiyu.conf.MyDatasourceRoutingAlgorithm
